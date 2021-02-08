@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>Opencv-Django</title>
+ </head>
+ <body>
+   <h1>Upload your image file.</h1>
+   <!-- action이 없는 경우 자기 자신에게 날라 / 파일은 multipart가 들어옴 -->
+   <form method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <!-- p태그로 감싸서 폼 양식을 내보내라는 것 -->
+     <button type="submit">Upload</button>
+   </form>
+   {% if uploaded_file_url %}
+     <img src="{{ uploaded_file_url }}">
+     <p>Uploaded file @ : <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+   {% endif %}
+   <p><a href="{% url 'opencv_webapp:simple_upload' %}">Return to home</a></p>
+ </body>
+</html>
